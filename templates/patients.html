@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Patients - CarePoint</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #082f49, #0e7490);
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            width: 250px;
+            background: #031f30;
+            padding: 25px 18px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .brand {
+            text-align: center;
+            padding: 15px 5px 35px;
+        }
+
+        .brand-icon {
+            font-size: 45px;
+        }
+
+        .brand h2 {
+            margin-top: 10px;
+        }
+
+        .brand p {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .nav-item {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 15px;
+            margin: 8px 0;
+            border-radius: 12px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: #0891b2;
+            color: white;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 25px;
+            left: 18px;
+            right: 18px;
+            text-align: center;
+            padding: 13px;
+            background: #dc2626;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        /* MAIN */
+
+        .main {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 35px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+        }
+
+        .user {
+            background: rgba(255,255,255,0.12);
+            padding: 12px 20px;
+            border-radius: 25px;
+        }
+
+        /* TOP CARD */
+
+        .page-card {
+            background: rgba(255,255,255,0.12);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .page-card h2 {
+            margin-bottom: 8px;
+        }
+
+        .page-card p {
+            color: #dbeafe;
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .search-box button {
+            padding: 14px 25px;
+            border: none;
+            border-radius: 10px;
+            background: #06b6d4;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* TABLE */
+
+        .table-card {
+            background: rgba(255,255,255,0.12);
+            padding: 25px;
+            border-radius: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #075985;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+        tr:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #cbd5e1;
+        }
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+                width: calc(100% - 200px);
+                padding: 20px;
+            }
+
+            .header {
+                display: block;
+            }
+
+            .user {
+                margin-top: 15px;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🏥</div>
+            <h2>CarePoint</h2>
+            <p>Hospital Management</p>
+        </div>
+
+        <a href="/dashboard" class="nav-item">
+            🏠 Dashboard
+        </a>
+
+        <a href="/patients" class="nav-item active">
+            🧑‍🤝‍🧑 Patients
+        </a>
+
+        <a href="#" class="nav-item">
+            👨‍⚕️ Doctors
+        </a>
+
+        <a href="#" class="nav-item">
+            📅 Appointments
+        </a>
+
+        <a href="/logout" class="logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Patients</h1>
+
+            <div class="user">
+                👤 {{ session["user"] }}
+            </div>
+
+        </div>
+
+
+        <div class="page-card">
+
+            <h2>Patient Management</h2>
+            
+            <a href="/add_patient"
+   style="display:inline-block;
+          margin-top:15px;
+          padding:12px 20px;
+          background:#06b6d4;
+          color:white;
+          text-decoration:none;
+          border-radius:10px;
+          font-weight:bold;">
+    ➕ Add Patient
+</a>
+
+            <p>
+                View and search registered patients in the hospital.
+            </p>
+
+            <form class="search-box" method="GET" action="/patients">
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search by name, phone or disease..."
+                    value="{{ search }}"
+                >
+
+                <button type="submit">
+                    🔍 Search
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- PATIENT TABLE -->
+
+        <div class="table-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Patient Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Disease</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for patient in patients %}
+
+                    <tr>
+
+                        <td>{{ patient.patient_id }}</td>
+
+                        <td>{{ patient.patient_name }}</td>
+
+                        <td>{{ patient.age }}</td>
+
+                        <td>{{ patient.gender }}</td>
+
+                        <td>{{ patient.phone }}</td>
+
+                        <td>{{ patient.disease }}</td>
+                        
+                    <td>
+    <a href="/edit_patient/{{ patient.patient_id }}"
+       style="background:#f59e0b;
+              color:white;
+              padding:8px 12px;
+              border-radius:7px;
+              text-decoration:none;">
+        ✏️ Edit
+    </a>
+</td>
+<td>
+    <a href="/delete_patient/{{ patient.patient_id }}"
+       onclick="return confirm('Are you sure you want to delete this patient?');"
+       style="
+           background:#ef4444;
+           color:white;
+           padding:8px 12px;
+           border-radius:7px;
+           text-decoration:none;
+           font-weight:bold;
+       ">
+        🗑️ Delete
+    </a>
+</td>
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td colspan="6" class="empty">
+                            No patients found.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
+
