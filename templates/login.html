@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hospital Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="login-page">
+
+    <div class="login-container">
+
+        <div class="login-left">
+            <div class="hospital-icon">✚</div>
+
+            <h1>CarePoint</h1>
+
+            <h2>Hospital Management System</h2>
+
+            <p>
+                Manage patients, doctors and appointments
+                efficiently from one place.
+            </p>
+
+            <div class="health-info">
+                <span>✓ Secure</span>
+                <span>✓ Reliable</span>
+                <span>✓ Easy to Manage</span>
+            </div>
+        </div>
+
+
+        <div class="login-right">
+
+            <div class="login-card">
+
+                <div class="welcome-icon">👨‍⚕️</div>
+
+                <h2>Welcome Back</h2>
+
+                <p class="login-subtitle">
+                    Sign in to access your hospital dashboard
+                </p>
+
+                <form method="POST">
+
+                    <label>Username</label>
+
+                    <div class="input-box">
+                        <span>👤</span>
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Enter username"
+                            required>
+                    </div>
+
+
+                    <label>Password</label>
+
+                    <div class="input-box">
+                        <span>🔒</span>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter password"
+                            required>
+                    </div>
+
+
+                    <button type="submit">
+                        Sign In →
+                    </button>
+
+                </form>
+
+                <p class="login-footer">
+                    Hospital Management System
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
